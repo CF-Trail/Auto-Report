@@ -20,3 +20,6 @@ download
 kys
 cheat
 exploit
+fat
+dumb
+noob
