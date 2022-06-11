@@ -25,3 +25,5 @@ dumb
 noob
 script
 mods
+russia
+ukraine
