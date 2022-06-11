@@ -37,3 +37,6 @@ homo
 gulp
 trash
 skill issue
+bald
+mad
+suck
