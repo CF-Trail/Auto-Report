@@ -27,3 +27,4 @@ script
 mods
 russia
 ukraine
+war
