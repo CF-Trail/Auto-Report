@@ -35,3 +35,4 @@ white
 black
 asia
 kms
+homo
