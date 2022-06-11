@@ -23,3 +23,5 @@ exploit
 fat
 dumb
 noob
+script
+mods
