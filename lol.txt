@@ -35,3 +35,5 @@ asia
 kms
 homo
 gulp
+trash
+skill issue
