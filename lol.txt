@@ -33,6 +33,7 @@ white
 black
 asia
 kms
+clown
 homo
 gulp
 trash
