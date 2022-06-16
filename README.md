@@ -1,2 +1,1 @@
-# Auto-Report
-https://discord.gg/outliershub ;; spam reports someone if they said blacklisted word on ur server (even if asdasdgaysadfas it will report) ;; https://discord.gg/outliershub
+fucking sirmeme this was made by .gg#1780 and snnwer#1349 not just snnwer blind dumbass 
