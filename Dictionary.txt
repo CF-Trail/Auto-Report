@@ -32,3 +32,5 @@ drinking
 pet
 pets
 petting
+tip
+tips
