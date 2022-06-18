@@ -20,6 +20,8 @@ return {
 "gulps";
 "gulp";
 "homo";
+"poc";
+"pride month";
 "licks";
 "lick";
 "licking";
