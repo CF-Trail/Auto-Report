@@ -1,4 +1,8 @@
 ---@diagnostic disable: unused-local
+
+setfflag("AbuseReportScreenshotPercentage", 0)
+setfflag("DFFlagAbuseReportScreenshot", "False")
+
 local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 
