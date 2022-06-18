@@ -20,7 +20,6 @@ return {
 "gulps";
 "gulp";
 "homo";
-"faygot";
 "licks";
 "lick";
 "licking";
