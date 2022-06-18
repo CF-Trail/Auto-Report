@@ -19,6 +19,7 @@ return {
 "sucks";
 "gulps";
 "gulp";
+"gulping";
 "homo";
 "poc";
 "pride month";
