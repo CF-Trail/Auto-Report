@@ -51,7 +51,7 @@ local success, error = pcall(function()
 	end;
 	function lib:report(player, thing, reason, offensive)
 
-		for _, word in next, messsages.whitelisted do
+		for word, _ in next, messsages.whitelisted do
 			if string.match(getgenv().autoreport.Message, word) then
 				return false;
 			end;
