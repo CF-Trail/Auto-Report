@@ -2,5 +2,6 @@ return {
   ["war%a"],
   made,
   fatherland,
+  ["EZ"],
   motherland
-}; -- requires contribution
+};
