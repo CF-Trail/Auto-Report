@@ -17,8 +17,8 @@ if not (getgenv()).autoreport then
 		Webhook = "",
 	
 		Words = {
-		Blacklisted = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua",
-		Whitelisted = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua"
+			Blacklisted = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua",
+			Whitelisted = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua"
 		}
 	};
 end;
@@ -28,8 +28,8 @@ if (getgenv()).autoreport.library == nil then
 end;
 
 local messages = {
-	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.words.Blacklisted)),
-	whitelisted = loadstring(game:HttpGet(getgenv().autoreport.words.Whitelisted))
+	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklisted)),
+	whitelisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Whitelisted))
 }
 
 local lib = {};
