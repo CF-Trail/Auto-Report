@@ -33,12 +33,10 @@ if (getgenv()).autoreport.library == nil then
 	(getgenv()).autoreport.library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source")))();
 end;
 
-local messages = {}
-
-messages.blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklist))()
-messages.whitelisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Whitelist))()
-
-
+local messages = {
+	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklist))()
+	whitelisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Whitelist))()
+}
 
 local lib = {};
 local success, error = pcall(function()
@@ -51,7 +49,7 @@ local success, error = pcall(function()
 	end;
 	function lib:report(player, thing, reason, offensive)
 
-		for word, _ in next, messsages.whitelisted do
+		for word, _ in next, messages.whitelisted do
 			if string.match(getgenv().autoreport.Message, word) then
 				return false;
 			end;
