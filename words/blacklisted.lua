@@ -1,190 +1,202 @@
 return {
 	hack = {
 		"Scamming",
-		"he's advertising hacks (viruses)"
+		"he's promoting virus hacks"
 	},
 	cheat = {
 		"Scamming",
-		"he's advertising hacks (viruses)"
+		"he's promoting virus hacks"
 	},
 	exploit = {
 		"Scamming",
-		"he's advertising hacks (viruses)"
+		"he's promoting virus hacks"
 	},
 	script = {
 		"Scamming",
-		"he's advertising hacks (viruses)"
+		"he's promoting virus hacks
 	},
 	fatherless = {
 		"Bullying",
-		"saying bad things about my parents"
+		"bullying me :("
 	},
 	motherless = {
 		"Bullying",
-		"saying bad things about my parents"
+		"bullying me :("
 	},
 	parentless = {
 		"Bullying",
-		"saying bad things about my parents"
+		"bullying me :("
 	},
 	parents = {
 		"Bullying",
-		"saying bad things about my parents"
+		"bullying me :("
 	},
 	ez = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	cancer = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	kid = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	bad = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
-	["get a life"] = {
+	get a life = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	noob = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	mods = {
 		"Bullying",
-		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+		"mean bully"
 	},
 	gay = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	gvae = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	gae = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	lgbt = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	furr = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	homo = {
 		"Bullying",
-		"saying bad things about other people, bullying them"
+		"bully"
 	},
 	dumb = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	stupid = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	fat = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	ugly = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	kms = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	trash = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	suck = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	mad = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	bald = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	retard = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
+	},
+	die = {
+		"Bullying",
+		"bullying me"
 	},
 	cry = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	ratio = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"mean, bullying me"
 	},
 	clown = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
-	["skill issue"] = {
+	skill issue = {
 		"Bullying",
-		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
+		"bullying me"
 	},
 	white = {
 		"Bullying",
-		"He's racist!"
+		"racist"
 	},
 	black = {
 		"Bullying",
-		"He's racist!"
+		"racist"
 	},
 	asia = {
 		"Bullying",
-		"He's racist!"
+		"racist"
 	},
 	negr = {
 		"Bullying",
-		"He's racist!"
+		"racist"
 	},
 	love = {
 		"Dating",
-		"he's dating in roblox"
+		"ew online daters"
 	},
 	gulp = {
 		"Dating",
-		"he's dating in roblox"
+		"ew online daters"
 	},
-	["like you"] = {
+	"like you" = {
 		"Dating",
-		"he's dating in roblox"
+		"ew online daters"
+	},
+	nut = {
+		"Dating",
+		"ew"
 	},
 	russia = {
 		"Bullying",
-		"he talking about russia ukraine war"
+		"he is talking about russia - ukraine war"
 	},
 	ukraine = {
 		"Bullying",
-		"he talking about russia ukraine war"
+		"he is talking about russia - ukraine war"
 	},
 	war = {
 		"Bullying",
-		"he talking about russia ukraine war"
+		"he is talking about russia - ukraine war"
 	},
 	cord = {
 		"Offsite Links",
-		"he offsite links"
+		"redirecting users offsite"
 	},
 	youtube = {
 		"Offsite Links",
-		"he offsite links"
+		"redirecting users offsite"
+	},
+	yt = {
+		"Offsite Links",
+		"redirecting users offsite"
 	},
 };
