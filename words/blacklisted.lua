@@ -167,9 +167,9 @@ return {
 		"Dating",
 		"ew online daters"
 	},
-	"like you" = {
-		"Dating",
-		"ew online daters"
+	["like you"] = {
+		"Bullying",
+		"he's bullying me"
 	},
 	nut = {
 		"Dating",
