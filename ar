@@ -6,7 +6,7 @@
 	Removal of initial credits to the authors is prohibited.
 	
 	To devs: I am using this for my own personal use and I'm not sharing the script with anyone else.
-
+        to forker: thanks
 ]]
 
 setfflag("AbuseReportScreenshotPercentage", 0)
