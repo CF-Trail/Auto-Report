@@ -34,7 +34,7 @@ if (getgenv()).autoreport.library == nil then
 end;
 
 local messages = {
-	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklist))()
+	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklist))(),
 	whitelisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Whitelist))()
 }
 
