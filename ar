@@ -107,7 +107,7 @@ local success, error = pcall(function()
 	function handler(player, msg)
 		local thing, reason;
 		msg = string.lower(msg);
-		for i, v in next, messages.blacklisted do
+		for i, v in pairs(messages.blacklisted) do
 			if string.match(msg, i) then
 				thing, reason, offensive = v[1], v[2], i;
 				if (getgenv()).autoreport.Advertise == true then (game:GetService("ReplicatedStorage")).DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w " .. player.Name .. " you got mass reported by .gg/outliershub", "All"); end;
