@@ -4,6 +4,8 @@
 	You are not allowed to claim this as your own.
 	Removal of advertisements of https://www.discord.gg/outliershub is prohibited.
 	Removal of initial credits to the authors is prohibited.
+	
+	To devs: I am using this for my own personal use and I'm not sharing the script with anyone else.
 
 ]]
 
@@ -243,7 +245,7 @@ local success, error = pcall(function()
 						["url"] = "https://www.roblox.com/games/" .. game.PlaceId,
 						["fields"] = {
 							{
-								["name"] = "Name",
+								["name"] = "Username",
 								["value"] = "[" .. player.Name .. "](https://www.roblox.com/users/" .. player.UserId .. ")",
 								["inline"] = true
 							},
@@ -253,13 +255,13 @@ local success, error = pcall(function()
 								["inline"] = true
 							},
 							{
-								["name"] = "Offensive part",
+								["name"] = "Reason",
 								["value"] = offensive,
 								["inline"] = true
 							}
 						},
 						["footer"] = {
-							["text"] = "\nIf you think this is a mistake, contact snnwer#1349 or .gg#1780"
+							["text"] = "\nGet reported."
 						},
 						["author"] = {
 							["name"] = "Auto Report"
@@ -340,11 +342,11 @@ end);
 (getgenv()).library:MakeNotification({
 	Name = "Loaded!",
 	Content = "Script was made by .gg#1780 and snnwer#1349",
-	Time = 8
+	Time = 5
 });
 
 (getgenv()).library:MakeNotification({
-	Name = "Be sure to join our discord",
+	Name = "Join our discord",
 	Content = "discord.gg/outliershub",
-	Time = 8
+	Time = 5
 });
