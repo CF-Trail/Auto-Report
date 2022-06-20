@@ -10,6 +10,8 @@
 setfflag("AbuseReportScreenshotPercentage", 0)
 setfflag("DFFlagAbuseReportScreenshot", "False") 
 
+repeat task.wait() until game:IsLoaded()
+
 local Default = {
 	Advertise = true;
 	Safe = false;
@@ -21,46 +23,49 @@ local Default = {
 	};
 }
 
-if not getgenv().autoreport then
-	getgenv().autoreport = Default
-end;
-
-for _,v in next, Default do
-	if not getgenv().autoreport[_] then getgenv().autoreport[_] = v end
-end
-
-if (getgenv()).autoreport.library == nil then
-	(getgenv()).autoreport.library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source")))();
-end;
+pcall(function()
+	if not autoreport then
+		autoreport = Default
+	end;
+	
+	for _,v in next, Default do
+		if not autoreport[_] then autoreport[_] = v end
+	end
+	
+	if autoreport.library == nil then
+		autoreport.library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source")))();
+	end;
+	
+	autoreport.gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+end)
 
 local messages = {
-	blacklisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Blacklist))(),
-	whitelisted = loadstring(game:HttpGet(getgenv().autoreport.Words.Whitelist))()
+	blacklisted = loadstring(game:HttpGet(autoreport.Words.Blacklist))(),
+	whitelisted = loadstring(game:HttpGet(autoreport.Words.Whitelist))()
 }
 
 local lib = {};
-local success, error = pcall(function()
+local success, err = pcall(function()
 	function lib:notify(title, text)
-		(getgenv()).autoreport.library:MakeNotification({
+		autoreport.library:MakeNotification({
 			Name = title,
 			Content = text,
 			Time = 3
 		});
 	end;
-	function lib:report(player, thing, reason, offensive)
+	function lib:report(player, report_type, reason, offensive)
 
 		for word, _ in next, messages.whitelisted do
-			if string.match(getgenv().autoreport.Message, word) then
+			if string.match(autoreport.Message, word) then
 				return false;
 			end;
 		end;
-		if (getgenv()).autoreport.Webhook == "" or (getgenv()).autoreport.Webhook == nil then
-			lib:notify("Report", "Reported " .. player.Name .. " because of \"" .. (getgenv()).autoreport.Message .. "\"");
-		else
+		lib:notify("Report", "Reported " .. player.Name .. " because of \"" .. autoreport.Message .. "\"");
+		if not (autoreport.Webhook == "" or autoreport.Webhook == nil) then
 				local data = 
 				{
 					["embeds"] = {{
-						["title"] = "**" .. gameName .. "**",
+						["title"] = "**" .. autoreport.gameName .. "**",
 						["description"] = "Auto-reported a player",
 						["type"] = "rich",
 						["color"] = tonumber(0x00aff4),
@@ -73,7 +78,7 @@ local success, error = pcall(function()
 							},
 							{
 								["name"] = "Message",
-								["value"] = getgenv().autoreport.Message,
+								["value"] = autoreport.Message,
 								["inline"] = true
 							},
 							{
@@ -90,70 +95,72 @@ local success, error = pcall(function()
 						}
 					}}
 				}
-			local newdata = (game:GetService("HttpService")):JSONEncode(data);
-			local headers = {
-				["content-type"] = "application/json"
-			};
-			request = http_request or request or HttpPost or syn.request;
-			local abcdef = {
-				Url = (getgenv()).autoreport.Webhook,
-				Body = newdata,
+
+			local args = {
+				Url = autoreport.Webhook,
+				Body = game:GetService("HttpService"):JSONEncode(data),
 				Method = "POST",
-				Headers = headers
+				Headers = {
+					["content-type"] = "application/json"
+				}
 			};
-			request(abcdef);
+
+			request = http_request or request or HttpPost or syn.request;
+			request(args);
 		end;
 
-		for i = 1, (getgenv().autoreport.Safe and math.random(1,2) or math.random(5, 12)) do
-			wait(math.random(1, 15) / 10)
-			game.Players:ReportAbuse(player, thing, reason)
+		for i = 1, (autoreport.Safe and math.random(1,2) or math.random(5, 12)) do
+			task.wait(math.random(1, 15) / 10)
+			game:GetService('Players'):ReportAbuse(player, report_type, reason)
 		end;
 	end;
 
 	function handler(player, msg)
-		local thing, reason;
+		local report_type, reason;
 		msg = string.lower(msg);
 		for i, v in next, messages.blacklisted do
 			if string.match(msg, i) then
-				thing, reason, offensive = v[1], v[2], i;
-				if (getgenv()).autoreport.Advertise == true then (game:GetService("ReplicatedStorage")).DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w " .. player.Name .. " you got mass reported by .gg/outliershub", "All"); end;
+				report_type, reason, offensive = v[1], v[2], i;
+				if autoreport.Advertise == true then game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w " .. player.Name .. " you got mass reported by .gg/outliershub", "All"); end;
 			end;
 		end;
 		if thing and reason and offensive then
-			lib:report(player, thing, reason, offensive);
+			lib:report(player, report_type, reason, offensive);
 		end;
 	end;
 end);
 
 if not success then
-	error(error);
+	error(err);
 end;
 
-for i, plr in pairs(game.Players:GetPlayers()) do
-	if plr ~= game.Players.LocalPlayer then
+for i, plr in pairs(game:GetService('Players'):GetPlayers()) do
+	if plr ~= game:GetService('Players').LocalPlayer then
 		plr.Chatted:Connect(function(msg)
-			(getgenv()).autoreport.Message = msg;
+			autoreport.Message = msg;
 			handler(plr, msg);
 		end);
 	end;
 end;
-game.Players.PlayerAdded:Connect(function(plr)
-	if plr ~= game.Players.LocalPlayer then
+game:GetService('Players').PlayerAdded:Connect(function(plr)
+	if plr ~= game:GetService('Players').LocalPlayer then
 		plr.Chatted:Connect(function(msg)
-			(getgenv()).autoreport.Message = msg;
+			autoreport.Message = msg;
 			handler(plr, msg);
 		end);
 	end;
 end);
 
-(getgenv()).autoreport.library:MakeNotification({
-	Name = "Loaded!",
-	Content = "Script was made by .gg#1780 and snnwer#1349",
-	Time = 8
-});
-
-(getgenv()).autoreport.library:MakeNotification({
-	Name = "Be sure to join our discord",
-	Content = "discord.gg/outliershub",
-	Time = 8
-});
+pcall(function()
+	autoreport.library:MakeNotification({
+		Name = "Loaded!",
+		Content = "Script was made by .gg#1780 and snnwer#1349",
+		Time = 8
+	});
+	
+	autoreport.library:MakeNotification({
+		Name = "Join our discord",
+		Content = "discord.gg/outliershub",
+		Time = 8
+	});
+end)
