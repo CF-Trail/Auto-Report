@@ -40,8 +40,8 @@ pcall(function()
 end)
 
 local messages = {
-	blacklisted = loadstring(game:HttpGet(autoreport.Words.Blacklist))(),
-	whitelisted = loadstring(game:HttpGet(autoreport.Words.Whitelist))()
+	blacklisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua"))(),
+	whitelisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua"))()
 }
 
 local lib = {};
