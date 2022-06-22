@@ -32,7 +32,7 @@ local Default = {
 
 if not autoreport then
 	getgenv().autoreport = Default
-elseif .wasAutoReportExecuted then
+elseif wasAutoReportExecuted then
 	return warn("Auto-Report is already executed!")
 end;
 
