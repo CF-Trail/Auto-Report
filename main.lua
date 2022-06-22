@@ -12,6 +12,8 @@ if setfflag then
 	setfflag("DFFlagAbuseReportScreenshot", "False") 
 end
 
+repeat task.wait() until game:IsLoaded()
+
 local Default = {
 	Advertise = true;
 	Safe = false;
@@ -118,9 +120,13 @@ local success, error_message = pcall(function()
 				Url = autoreport.Webhook,
 				Body = newdata,
 				Method = "POST",
-				Headers = headers
+				Headers = {
+					["content-type"] = "application/json"
+				}
 			};
-			request(abcdef);
+
+			request = http_request or request or HttpPost or syn.request;
+			request(args);
 		end;
 
 		if not reportQueue[player.UserId] then 
@@ -140,7 +146,7 @@ local success, error_message = pcall(function()
 	end
 
 	function handler(player, msg)
-		local thing, reason;
+		local report_type, reason;
 		msg = string.lower(msg);
 		for i, v in next, messages.blacklisted do
 			if string.match(msg, i) then
@@ -203,14 +209,22 @@ coroutine.wrap(function()
 	end
 end)();
 
-autoreport.library:MakeNotification({
-	Name = "Loaded!",
-	Content = "Script was made by .gg#1780 and snnwer#1349",
-	Time = 8
-});
+pcall(function()
+    autoreport.library:MakeNotification({
+	    Name = "Loaded!",
+	    Content = "Script was made by .gg#1780 and snnwer#1349",
+	    Time = 8
+    });
 
-autoreport.library:MakeNotification({
-	Name = "Be sure to join our discord",
-	Content = "discord.gg/outliershub",
-	Time = 8
-});
+    autoreport.library:MakeNotification({
+	    Name = "Contribution",
+	    Content = "Contribution was made by engo#0320 // https://engo.gq",
+	    Time = 8
+    });
+
+    autoreport.library:MakeNotification({
+	    Name = "Join the creators' discord",
+	    Content = "discord.gg/outliershub",
+	    Time = 8
+    });
+end)
