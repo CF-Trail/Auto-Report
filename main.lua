@@ -27,11 +27,16 @@ local Default = {
 	wasExecuted = true;
 }
 
+-- sorry for the executed check t hing taking 7 commits or sum
+-- my 3:49 am brain cannot handle
+
 if not autoreport then
 	getgenv().autoreport = Default
-elseif autoreport.wasExecuted then -- bro
+elseif .wasAutoReportExecuted then
 	return warn("Auto-Report is already executed!")
 end;
+
+getgenv().wasAutoReportExecuted = true
 
 for _,v in next, Default do
 	if not autoreport[_] then getgenv().autoreport[_] = v end
