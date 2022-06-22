@@ -7,40 +7,55 @@
 
 ]]
 
-setfflag("AbuseReportScreenshotPercentage", 0)
-setfflag("DFFlagAbuseReportScreenshot", "False") 
+if setfflag then
+	setfflag("AbuseReportScreenshotPercentage", 0)
+	setfflag("DFFlagAbuseReportScreenshot", "False") 
+end
 
 repeat task.wait() until game:IsLoaded()
 
 local Default = {
-	Advertise = true,
-	Safe = false,
-	Webhook = "",
+	Advertise = true;
+	Safe = false;
+	Webhook = ""; -- Webhook URL
+	
+	Words = {
+	    Blacklist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua";
+	    Whitelist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua";
+	};
 }
 
-pcall(function()
-	if not autoreport then
-		autoreport = Default
-	end;
-	
-	for _,v in next, Default do
-		if not autoreport[_] then autoreport[_] = v end
-	end
-	
-	if autoreport.library == nil then
-		autoreport.library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source")))();
-	end;
-	
-	autoreport.gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-end)
+if not autoreport then
+	getgenv().autoreport = Default
+else
+	return warn("Auto-Report is already executed!")
+end;
+
+for _,v in next, Default do
+	if not autoreport[_] then getgenv().autoreport[_] = v end
+end
+
+if autoreport.library == nil then
+	getgenv().autoreport.library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source")))();
+end;
 
 local messages = {
-	blacklisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua"))(),
-	whitelisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua"))()
-}
+	blacklisted = {},
+	whitelisted = {},
+};
 
+pcall(function() -- Sometimes http get fails, or the link maybe invalid or missing.
+	messages = {
+		blacklisted = loadstring(game:HttpGet(autoreport.Words.Blacklist))(),
+		whitelisted = loadstring(game:HttpGet(autoreport.Words.Whitelist))()
+	};
+end);
+
+local players = game:GetService("Players");
+local lastReportTick = 0;
+local reportQueue = {};
 local lib = {};
-local success, err = pcall(function()
+local success, error_message = pcall(function()
 	function lib:notify(title, text)
 		autoreport.library:MakeNotification({
 			Name = title,
@@ -48,19 +63,25 @@ local success, err = pcall(function()
 			Time = 3
 		});
 	end;
-	function lib:report(player, report_type, reason, offensive)
 
+	function lib:report(player, thing, reason)
+		players:ReportAbuse(player, thing, reason)
+	end;
+
+	function lib:addToQueue(player, thing, reason, offensive, message) 
+		if (reportQueue[player.UserId] and #reportQueue[player.UserId] > 0) then 
+			return
+		end
 		for word, _ in next, messages.whitelisted do
-			if string.match(autoreport.Message, word) then
+			if string.match(message, word) then
 				return false;
 			end;
 		end;
-		lib:notify("Report", "Reported " .. player.Name .. " because of \"" .. autoreport.Message .. "\"");
-		if not (autoreport.Webhook == "" or autoreport.Webhook == nil) then
+		if autoreport.Webhook ~= "" and autoreport.Webhook ~= nil then
 				local data = 
 				{
 					["embeds"] = {{
-						["title"] = "**" .. autoreport.gameName .. "**",
+						["title"] = "**" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "**",
 						["description"] = "Auto-reported a player",
 						["type"] = "rich",
 						["color"] = tonumber(0x00aff4),
@@ -73,7 +94,7 @@ local success, err = pcall(function()
 							},
 							{
 								["name"] = "Message",
-								["value"] = autoreport.Message,
+								["value"] =	message,
 								["inline"] = true
 							},
 							{
@@ -90,10 +111,14 @@ local success, err = pcall(function()
 						}
 					}}
 				}
-
-			local args = {
+			local newdata = (game:GetService("HttpService")):JSONEncode(data);
+			local headers = {
+				["content-type"] = "application/json"
+			};
+			local request = http_request or request or HttpPost or syn.request;
+			local abcdef = {
 				Url = autoreport.Webhook,
-				Body = game:GetService("HttpService"):JSONEncode(data),
+				Body = newdata,
 				Method = "POST",
 				Headers = {
 					["content-type"] = "application/json"
@@ -104,58 +129,102 @@ local success, err = pcall(function()
 			request(args);
 		end;
 
-		for i = 1, (autoreport.Safe and math.random(1,2) or math.random(5, 12)) do
-			task.wait(math.random(1, 15) / 10)
-			game:GetService('Players'):ReportAbuse(player, report_type, reason)
-		end;
-	end;
+		if not reportQueue[player.UserId] then 
+			reportQueue[player.UserId] = {}
+		end
+
+		local reportAmount = autoreport.Safe and math.random(1,2) or math.random(5, 12)
+		for i = 1, reportAmount do
+			table.insert(reportQueue[player.UserId], {
+				player = player,
+				thing = thing,
+				reason = reason,
+				offensive = offensive,
+				message = message,
+			})
+		end
+	end
 
 	function handler(player, msg)
 		local report_type, reason;
 		msg = string.lower(msg);
 		for i, v in next, messages.blacklisted do
 			if string.match(msg, i) then
-				report_type, reason, offensive = v[1], v[2], i;
-				if autoreport.Advertise == true then game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w " .. player.Name .. " you got mass reported by .gg/outliershub", "All"); end;
+				thing, reason, offensive = v[1], v[2], i;
+				if autoreport.Advertise == true then (game:GetService("ReplicatedStorage")).DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w " .. player.Name .. " you got mass reported by .gg/outliershub", "All"); end;
 			end;
 		end;
 		if thing and reason and offensive then
-			lib:report(player, report_type, reason, offensive);
+			lib:addToQueue(player, thing, reason, offensive, msg);
 		end;
+	end;
+
+	local function getNextInQueue() -- returns the next player in the queue
+		for i,v in next, reportQueue do 
+			if #v > 0 then
+				local a = v[1]
+				table.remove(v, 1)
+				return a, i;
+			end
+		end;
+		return nil, 0;
+	end;
+
+	function handleQueue() -- report next player in queue
+		local nextInQueue, index = getNextInQueue()
+		if not nextInQueue then 
+			return
+		end;
+		lib:report(nextInQueue.player, nextInQueue.thing, nextInQueue.reason)
+		lib:notify("Report", "Reported " .. nextInQueue.player.Name .. " because of \"" .. nextInQueue.message .. "\"");
 	end;
 end);
 
 if not success then
-	error(err);
+	error(error_message);
 end;
 
-for i, plr in pairs(game:GetService('Players'):GetPlayers()) do
-	if plr ~= game:GetService('Players').LocalPlayer then
+for _, plr in pairs(players:GetPlayers()) do
+	if plr ~= players.LocalPlayer then -- if 'or true' is still here, remove it. it was for testing purposes.
 		plr.Chatted:Connect(function(msg)
-			autoreport.Message = msg;
 			handler(plr, msg);
 		end);
 	end;
 end;
-game:GetService('Players').PlayerAdded:Connect(function(plr)
-	if plr ~= game:GetService('Players').LocalPlayer then
+players.PlayerAdded:Connect(function(plr)
+	if plr ~= players.LocalPlayer then
 		plr.Chatted:Connect(function(msg)
-			autoreport.Message = msg;
 			handler(plr, msg);
 		end);
 	end;
 end);
 
+coroutine.wrap(function()
+	while true do -- AutoReportQueue loop
+		if tick() - lastReportTick > 10 then -- 1 Report per 10s is the max (unconfirmed).
+			handleQueue()
+			lastReportTick = tick()
+		end
+		task.wait(0.1)
+	end
+end)();
+
 pcall(function()
-	autoreport.library:MakeNotification({
-		Name = "Loaded!",
-		Content = "Script was made by .gg#1780 and snnwer#1349",
-		Time = 8
-	});
-	
-	autoreport.library:MakeNotification({
-		Name = "Join our discord",
-		Content = "discord.gg/outliershub",
-		Time = 8
-	});
+    autoreport.library:MakeNotification({
+	    Name = "Loaded!",
+	    Content = "Script was made by .gg#1780 and snnwer#1349",
+	    Time = 8
+    });
+
+    autoreport.library:MakeNotification({
+	    Name = "Contribution",
+	    Content = "Contribution was made by engo#0320 // https://engo.gq",
+	    Time = 8
+    });
+
+    autoreport.library:MakeNotification({
+	    Name = "Join the creators' discord",
+	    Content = "discord.gg/outliershub",
+	    Time = 8
+    });
 end)
