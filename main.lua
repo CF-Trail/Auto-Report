@@ -112,9 +112,6 @@ local success, error_message = pcall(function()
 					}}
 				}
 			local newdata = (game:GetService("HttpService")):JSONEncode(data);
-			local headers = {
-				["content-type"] = "application/json"
-			};
 			local request = http_request or request or HttpPost or syn.request;
 			local abcdef = {
 				Url = autoreport.Webhook,
@@ -124,9 +121,7 @@ local success, error_message = pcall(function()
 					["content-type"] = "application/json"
 				}
 			};
-
-			request = http_request or request or HttpPost or syn.request;
-			request(args);
+			request(abcdef);
 		end;
 
 		if not reportQueue[player.UserId] then 
