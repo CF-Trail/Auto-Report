@@ -15,7 +15,7 @@ end
 local Default = {
 	Advertise = true;
 	Safe = false;
-	Webhook = "https://discord.com/api/webhooks/989290006315151391/SH2xjXfIB40oRWXVZAxP067rcwz2BcJwmsOAIOA14xR-VEoSblAeujcMS_IHZAlDw6ZZ";
+	Webhook = ""; -- Webhook URL
 	
 	Words = {
 	    Blacklist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua";
