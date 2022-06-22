@@ -13,14 +13,9 @@ setfflag("DFFlagAbuseReportScreenshot", "False")
 repeat task.wait() until game:IsLoaded()
 
 local Default = {
-	Advertise = true;
-	Safe = false;
-	Webhook = "";
-	
-	Words = {
-	    Blacklist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/blacklisted.lua";
-	    Whitelist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua";
-	};
+	Advertise = true,
+	Safe = false,
+	Webhook = "",
 }
 
 pcall(function()
