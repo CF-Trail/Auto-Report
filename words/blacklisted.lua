@@ -35,6 +35,10 @@ return {
 		"Bullying",
 		"saying rude things to me, i can't take it anymore, i've had a really bad year"
 	},
+	ew = {
+		"Bullying",
+		"saying rude things to me, i can't take it anymore, i've had a really bad year"
+	},
 	cancer = {
 		"Bullying",
 		"saying rude things to me, i can't take it anymore, i've had a really bad year"
