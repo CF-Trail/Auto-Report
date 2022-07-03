@@ -24,7 +24,7 @@ local Default = {
 	    Whitelist = "https://raw.githubusercontent.com/CF-Trail/Auto-Report/main/words/whitelisted.lua";
 	};
 	
-	wasExecuted = true;
+	ReportFriends = false;
 }
 
 -- sorry for the executed check t hing taking 7 commits or sum
@@ -187,14 +187,14 @@ if not success then
 end;
 
 for _, plr in pairs(players:GetPlayers()) do
-	if plr ~= players.LocalPlayer then -- if 'or true' is still here, remove it. it was for testing purposes.
+	if plr ~= players.LocalPlayer and not (autoreport.ReportFriends and players.LocalPlayer:IsFriendsWith(plr.UserId) or false) then -- if 'or true' is still here, remove it. it was for testing purposes.
 		plr.Chatted:Connect(function(msg)
 			handler(plr, msg);
 		end);
 	end;
 end;
 players.PlayerAdded:Connect(function(plr)
-	if plr ~= players.LocalPlayer then
+	if plr ~= players.LocalPlayer and not (autoreport.ReportFriends and players.LocalPlayer:IsFriendsWith(plr.UserId) or false) then
 		plr.Chatted:Connect(function(msg)
 			handler(plr, msg);
 		end);
