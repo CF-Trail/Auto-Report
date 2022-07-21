@@ -50,7 +50,7 @@ return {
 		"Bullying",
 		"saying bad things about my parents"
 	},
-	father figure = {
+	['father figure'] = {
 		"Bullying",
 		"saying bad things about my parents"
 	},
@@ -90,11 +90,11 @@ return {
 		"Bullying",
 		"saying rude things to me, i can't take it anymore, i've had a really bad year"
 	},
-	get a life = {
+	['get a life'] = {
 		"Bullying",
 		"saying rude things to me, i can't take it anymore, i've had a really bad year"
 	},
-	no life = {
+	['no life'] = {
 		"Bullying",
 		"saying rude things to me, i can't take it anymore, i've had a really bad year"
 	},
@@ -186,7 +186,7 @@ return {
 		"Bullying",
 		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
 	},
-	skill issue = {
+	['skill issue'] = {
 		"Bullying",
 		"this is really mean! i've had a really bad year, my dog passed out and i just can't take it anymore!"
 	},
@@ -214,7 +214,7 @@ return {
 		"Dating",
 		"he's dating in roblox"
 	},
-	like you = {
+	['like you'] = {
 		"Dating",
 		"he's dating in roblox"
 	},
