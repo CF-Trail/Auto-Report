@@ -1,18 +1,23 @@
 repeat task.wait() until game:IsLoaded()
 
-words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hacker','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube','die'}
+if not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents') or not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents'):FindFirstChild('OnMessageDoneFiltering') then return end
+DCSCE = game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents')
+
+words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hacker','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube','die','daddy','shut up',' black ','negro','simp','nivver','niger','stupid'}
 
 if setfflag then
 	setfflag("AbuseReportScreenshotPercentage", 0)
 	setfflag("DFFlagAbuseReportScreenshot", "False") 
 end
 
-local Default = {
-    Webhook = ''
+if not getgenv().autoreportcfg then
+getgenv().autoreportcfg = {
+    Webhook = '',
+    autoMessage = {
+       enabled = true,
+       Message = 'so sad you got autoreported :(',
+    },
 }
-
-if not autoreport then
-	getgenv().autoreport = Default
 end
 
 local players = game:GetService("Players")
@@ -28,10 +33,13 @@ end;
 
 function handler(msg,speaker)
    for i,v in next, words do
-      if string.match(string.lower(msg),v) then
+      if string.match(string.lower(msg),v) or msg == 'L' then
+        for i = 0,2 do
          players:ReportAbuse(players[speaker],'Bullying','He bullied me :(')
          task.wait()
          players:ReportAbuse(players[speaker],'Scamming','He advertise cheat')
+         task.wait(1)
+        end
          if autoreport.Webhook ~= nil and autoreport.Webhook ~= '' then
          local data = 
          {
@@ -73,7 +81,10 @@ function handler(msg,speaker)
      };
      request(abcdef);
     else
-        notify('Autoreport','Autoreported ' .. speaker)
+        notify('Autoreport','Autoreported ' .. speaker .. ' | offensive part: ' .. v)
+    end
+    if DCSCE:FindFirstChild('SayMessageRequest') and autoreportcfg.autoMessage.enabled == true then
+       DCSCE.SayMessageRequest:FireServer('/w ' .. speaker .. ' ' .. autoreportcfg.autoMessage.Message,'All')
     end
       end
    end
