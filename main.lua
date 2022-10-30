@@ -40,7 +40,7 @@ function handler(msg,speaker)
          players:ReportAbuse(players[speaker],'Scamming','He advertise cheat')
          task.wait(1)
         end
-         if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' and autoreport.Webhook ~= ' ' then
+         if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' and autoreportcfg.Webhook ~= ' ' then
          local data = 
          {
              ["embeds"] = {{
