@@ -3,7 +3,7 @@ repeat task.wait() until game:IsLoaded()
 if not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents') or not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents'):FindFirstChild('OnMessageDoneFiltering') then return end
 DCSCE = game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents')
 
-words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hacker','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube','die','daddy','shut up',' black ','negro','simp','nivver','niger','stupid'}
+words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hack','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube','die','daddy','shut up',' black ','negro','simp','nivver','niger','stupid'}
 
 if setfflag then
 	setfflag("AbuseReportScreenshotPercentage", 0)
