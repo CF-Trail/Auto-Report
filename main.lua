@@ -27,9 +27,16 @@ function notify(title, text)
     notifs:MakeNotification({
         Name = title,
         Content = text,
-        Time = 4
+        Time = 5
     });
 end;
+
+
+if syn then
+   notify("Autoreport",'this DOESNT WORK ON SYNAPSE!')
+   notify('Autoreport','3ds disabled ReportAbuse so yea')
+   return
+end
 
 function handler(msg,speaker)
    for i,v in next, words do
