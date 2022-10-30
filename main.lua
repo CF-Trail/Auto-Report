@@ -1,6 +1,6 @@
 repeat task.wait() until game:IsLoaded()
 
-words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hacker','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube',''}
+words = {'dumb','kid','retard','furry','gay','lesbian','lgbt','noob','trash','hacker','cheat','exploit','script','fat','motherless','fatherless','familyless','synapse','krnl','wizard','youtube','die'}
 
 if setfflag then
 	setfflag("AbuseReportScreenshotPercentage", 0)
