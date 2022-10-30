@@ -10,9 +10,9 @@ if setfflag then
 	setfflag("DFFlagAbuseReportScreenshot", "False") 
 end
 
-if not getgenv().autoreportcfg then
+if not autoreportcfg then
 getgenv().autoreportcfg = {
-    Webhook = '',
+    Webhook = '', 
     autoMessage = {
        enabled = true,
        Message = 'so sad you got autoreported :(',
@@ -40,7 +40,7 @@ function handler(msg,speaker)
          players:ReportAbuse(players[speaker],'Scamming','He advertise cheat')
          task.wait(1)
         end
-         if autoreport.Webhook ~= nil and autoreport.Webhook ~= '' then
+         if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' then
          local data = 
          {
              ["embeds"] = {{
@@ -72,7 +72,7 @@ function handler(msg,speaker)
      local newdata = (game:GetService("HttpService")):JSONEncode(data);
      local request = http_request or request or HttpPost or http.request or syn.request;
      local abcdef = {
-         Url = autoreport.Webhook,
+         Url = autoreportcfg.Webhook,
          Body = newdata,
          Method = "POST",
          Headers = {
