@@ -44,7 +44,6 @@ function handler(msg,speaker)
       if string.match(string.lower(msg),i) or msg == 'L' then
         for i = 0,4 do
          players:ReportAbuse(players[speaker],v[1],v[2])
-		 print(v[1],v[2])
          task.wait(1)
         end
          if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' and autoreportcfg.Webhook ~= ' ' then
