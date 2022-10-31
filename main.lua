@@ -20,6 +20,7 @@ words = {
     ['skill issue'] = 'Bullying',
     ['parent'] = 'Bullying',
     ['kid'] = 'Bullying',
+    ['ugly'] = 'Bullying',
     ['child'] = 'Bullying',
     ['trash'] = 'Bullying',
     ['bozo'] = 'Bullying',
@@ -84,10 +85,9 @@ end
 function handler(msg,speaker)
    for i,v in next, words do
       if string.match(string.lower(msg),i) then
-        for i = 1,2 do
          players:ReportAbuse(players[speaker],v,'He is breaking roblox TOS')
-         task.wait(0.5)
-        end
+         task.wait(1.5)
+         players:ReportAbuse(players[speaker],v,'He is breaking roblox TOS')
          if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' and autoreportcfg.Webhook ~= ' ' then
          local data = 
          {
