@@ -42,7 +42,7 @@ end
 function handler(msg,speaker)
    for i,v in next, words do
       if string.match(string.lower(msg),i) then
-        for i = 0,4 do
+        for i = 1,2 do
          players:ReportAbuse(players[speaker],v[1],v[2])
          task.wait(1)
         end
