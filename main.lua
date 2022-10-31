@@ -56,7 +56,6 @@ end
 if not autoreportcfg then
 getgenv().autoreportcfg = {
     Webhook = '', 
-    Blatant = false, -- 12 reports instead of 6
     autoMessage = {
        enabled = true,
        Message = 'so sad you got autoreported :(',
