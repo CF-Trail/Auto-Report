@@ -85,9 +85,9 @@ end
 function handler(msg,speaker)
    for i,v in next, words do
       if string.match(string.lower(msg),i) then
-         players:ReportAbuseV3(players[speaker],'Text Chat',v,'He is breaking roblox TOS')
+         players:ReportAbuse(players[speaker],'Text Chat',v,'He is breaking roblox TOS')
          task.wait(1.5)
-         players:ReportAbuseV3(players[speaker],'Text Chat',v,'He is breaking roblox TOS')
+         players:ReportAbuse(players[speaker],'Text Chat',v,'He is breaking roblox TOS')
          if autoreportcfg.Webhook ~= nil and autoreportcfg.Webhook ~= '' and autoreportcfg.Webhook ~= ' ' then
          local data = 
          {
