@@ -48,12 +48,6 @@ words = {
 
 if not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents') or not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents'):FindFirstChild('OnMessageDoneFiltering') then return end
 DCSCE = game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents')
-
-if setfflag and typeof(setfflag) == 'function' then
-	setfflag("AbuseReportScreenshotPercentage", 0)
-	setfflag("DFFlagAbuseReportScreenshot", "False") 
-end
-
 if not autoreportcfg then
 getgenv().autoreportcfg = {
     Webhook = '', 
