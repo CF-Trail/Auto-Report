@@ -11,7 +11,7 @@ words = {
     ['no life'] = 'Bullying',
     ['nolife'] = 'Bullying',
     ['wizard'] = 'Bullying',
-    ['reports'] = 'Bullying',
+    ['report'] = 'Bullying',
     ['father'] = 'Bullying',
     ['mother'] = 'Bullying',
     ['dumb'] = 'Bullying',
@@ -44,6 +44,9 @@ words = {
     ['download'] = 'Offsite Links',
     ['youtube'] = 'Offsite Links',
     ['dizzy'] = 'Offsite Links',
+    ['trans'] = 'Bullying',
+    ['lesbian'] = 'Bullying',
+    ['lgbt'] = 'Bullying'
 }
 
 if not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents') or not game:GetService('ReplicatedStorage'):FindFirstChild('DefaultChatSystemChatEvents'):FindFirstChild('OnMessageDoneFiltering') then return end
