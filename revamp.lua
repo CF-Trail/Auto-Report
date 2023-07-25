@@ -105,7 +105,7 @@ players.PlayerChatted:Connect(function(chatType, plr, msg)
 			if string.find(msg, i) then
 				lib.bw = i
 				lib[plr.UserId] = {
-					i,
+					plr,
 					v
 				}
 				lib.report(plr.UserId, plr.Name)
