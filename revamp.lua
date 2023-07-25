@@ -77,19 +77,17 @@ function lib.notify()
 	}
 end
 
-function lib.report(user, name)
+function lib.report(user, name, rs)
 	if user and lib.cooldown == false then
 		lib.username = name
 		local suc, er = pcall(function()
-			local data = table.unpack(lib[user])
-			players:ReportAbuse(data, 'breaking TOS')
+			players:ReportAbuse(players:FindFirstChild(name), rs, 'breaking TOS')
 		end)
 		if not suc then
 			return warn("Couldn't report due to the reason: " .. er .. ' | AR')
 		else
 			lib.notify()
 		end
-		lib[user] = nil
 		lib.cooldown = true
 		task.wait(5)
 		lib.username = 'unknown'
@@ -104,11 +102,7 @@ players.PlayerChatted:Connect(function(chatType, plr, msg)
 		for i, v in next, words do
 			if string.find(msg, i) then
 				lib.bw = i
-				lib[plr.UserId] = {
-					plr,
-					v
-				}
-				lib.report(plr.UserId, plr.Name)
+				lib.report(plr.UserId, plr.Name,v)
 			end
 		end
 	end
