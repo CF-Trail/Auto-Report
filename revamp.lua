@@ -16,6 +16,7 @@ local words = {
 	['lesbian'] = 'Bullying',
 	['suicide'] = 'Bullying',
 	['cum'] = 'Swearing',
+	['F@G0T'] = 'Bullying',
 	['cock'] = 'Swearing',
 	['penis'] = 'Swearing',
 	['furry'] = 'Bullying',
